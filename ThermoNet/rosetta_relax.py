@@ -6,9 +6,15 @@ from argparse import ArgumentParser
 
 def main():
     """
+    This is a utility script created to work with the ThermoNet ddG prediction protocol.
+    It takes a given list of variants and the path to the Rosetta binary. It runs the
+    Rosetta binary to create a structural model for each of the variant in the list.
     """
     # parse command-line arguments
-    parser = ArgumentParser()
+    parser = ArgumentParser(description=
+        """This is a utility script created to work with the ThermoNet ddG prediction protocol.
+        It takes a given list of variants and the path to the Rosetta binary. It runs the
+        Rosetta binary to create a structural model for each of the variant in the list.""")
     parser.add_argument('-l', '--variant-list', dest='variant_list', type=str,
             required=True, help='A list of variants, one per line in the format "PDB CHAIN POS WT MUT"')
     # parser.add_argument('-s', '--start-struct', dest='start_struct', type=str,

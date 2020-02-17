@@ -4,11 +4,11 @@ ThermoNet is a computational framework for quantitative prediction of the impact
 ## Requirements
 To use ThermoNet, you would need to install the following software and Python libraries:
   * Rosetta 3.10. Rosetta is a multi-purpose macromolecular modeling suite that is used in ThermoNet for creating and refining protein structures. You can get Rosetta from Rosetta Commons: https://www.rosettacommons.org/software
-  * HTMD 1.17. HTMD is Python library for high-throughput molecular modeling and dynamics simulations. It is called in ThermoNet for voxelizing protein structures and parametrizing the resulting 3D voxel grids.
+  * HTMD 1.17. HTMD is a Python library for high-throughput molecular modeling and dynamics simulations. It is called in ThermoNet for voxelizing protein structures and parametrizing the resulting 3D voxel grids.
   * Keras with TensorFlow as the backend.
 
 ## Installation
-ThermoNet ddG prediction is a multi-step protocol. Each step replies on a specific third-party software that needs to be installed first. In the following, we outline the steps to installing them.
+ThermoNet ddG prediction is a multi-step protocol. Each step relies on a specific third-party software that needs to be installed first. In the following, we outline the steps to install them.
 
 ### Install Rosetta
 1. Go to https://els2.comotion.uw.edu/product/rosetta to get an academic license for Rosetta.
@@ -44,3 +44,21 @@ where VARIANT_LIST is a given file in which each line is a given variant in the 
 gends.py -i VARIANT_LIST -o test_direct_stacked_16_1 -p /path/to/where/all/XXXXX_relaxed.pdb/is/stored --boxsize 16 --voxelsize 1 --direct
 ```
 This command will generate a file called `test_direct_stacked_16_1.npy` that stores the parameterized 3D voxel grids for each variant in the given list. This file will be used as input to the ensemble of 3D deep convolutional neural networks.
+
+4. Run predict.py:
+```bash
+for i in `seq 1 10`; do predict.py -x test_direct_stacked_16_1.npy -m models/conv_16_24_32_dense_24_ensemble_member_${i}.h5 -o test_predictions_${i}.txt; done
+```
+
+## Example
+To be added ...
+
+## References
+  1. Rosetta references
+    * Leaver-Fay, A., Tyka, M., Lewis, S.M., Lange, O.F., Thompson, J., Jacak, R., Kaufman, K., Renfrew, P.D., Smith, C.A., Sheffler, W., et al. (2011). ROSETTA3: an object-oriented software suite for the simulation and design of macromolecules. Methods Enzymol 487, 545-574
+    * Tyka, M.D., Keedy, D.A., Andre, I., Dimaio, F., Song, Y., Richardson, D.C., Richardson, J.S., and Baker, D. (2011). Alternate states of proteins revealed by detailed energy landscape mapping. J Mol Biol 405, 607-618
+  2. Protein folding, structure prediction, and thermostability
+    * Li, B., Fooksa, M., Heinze, S., and Meiler, J. (2018). Finding the needle in the haystack: towards solving the protein-folding problem computationally. Crit Rev Biochem Mol Biol 53, 1-28 
+    * Predicting changes in the stability of proteins and protein complexes: A study of more than 1000 mutations. Journal of Molecular Biology 320, 369-387
+  3. HTMD
+    * Doerr, S., Harvey, M.J., Noe, F., and De Fabritiis, G. (2016). HTMD: High-Throughput Molecular Dynamics for Molecular Discovery. Journal of Chemical Theory and Computation 12, 1845-1852

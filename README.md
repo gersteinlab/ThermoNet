@@ -88,12 +88,14 @@ gends.py -i p53_variants.txt -o p53_direct_stacked_16_1 -p ./ --boxsize 16 --vox
 for i in `seq 1 10`; do predict.py -x p53_direct_stacked_16_1.npy -m ../models/conv_16_24_32_dense_24_ensemble_member_${i}.h5 -o p53_predictions_${i}.txt; done
 ```
 ## References
-  1. Rosetta
+  1. 3D convolutional neural networks
+  * Torng, W., and Altman, R.B. (2017). 3D deep convolutional neural networks for amino acid environment similarity analysis. BMC bioinformatics 18, 302
+  * Jimenez, J., Skalic, M., Martinez-Rosell, G., and De Fabritiis, G. (2018). K-DEEP: Protein-Ligand Absolute Binding Affinity Prediction via 3D-Convolutional Neural Networks. Journal of Chemical Information and Modeling 58, 287-296 
+  2. Rosetta
   * Leaver-Fay, A., Tyka, M., Lewis, S.M., Lange, O.F., Thompson, J., Jacak, R., Kaufman, K., Renfrew, P.D., Smith, C.A., Sheffler, W., et al. (2011). ROSETTA3: an object-oriented software suite for the simulation and design of macromolecules. Methods Enzymol 487, 545-574
   * Tyka, M.D., Keedy, D.A., Andre, I., Dimaio, F., Song, Y., Richardson, D.C., Richardson, J.S., and Baker, D. (2011). Alternate states of proteins revealed by detailed energy landscape mapping. J Mol Biol 405, 607-618
-  2. Protein folding and thermostability
+  3. Protein folding and thermostability
   * Li, B., Fooksa, M., Heinze, S., and Meiler, J. (2018). Finding the needle in the haystack: towards solving the protein-folding problem computationally. Crit Rev Biochem Mol Biol 53, 1-28 
   * Guerois, R., Nielsen, J.E., and Serrano, L. (2002). Predicting changes in the stability of proteins and protein complexes: A study of more than 1000 mutations. Journal of Molecular Biology 320, 369-387
-  3. HTMD
+  4. HTMD
   * Doerr, S., Harvey, M.J., Noe, F., and De Fabritiis, G. (2016). HTMD: High-Throughput Molecular Dynamics for Molecular Discovery. Journal of Chemical Theory and Computation 12, 1845-1852
-  * Jimenez, J., Skalic, M., Martinez-Rosell, G., and De Fabritiis, G. (2018). K-DEEP: Protein-Ligand Absolute Binding Affinity Prediction via 3D-Convolutional Neural Networks. Journal of Chemical Information and Modeling 58, 287-296 

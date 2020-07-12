@@ -76,8 +76,8 @@ def main():
     
     
     # instantiate the model for display model architecture
-    conv_layer_sizes = (32, 48, 64)
-    dense_layer_size = 32
+    conv_layer_sizes = (16, 24, 32)
+    dense_layer_size = 24
     model = build_model('regression', conv_layer_sizes, dense_layer_size)
     model.summary()
     

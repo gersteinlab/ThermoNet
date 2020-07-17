@@ -83,9 +83,9 @@ The purpose of renaming the files is to make the file names conform to the requi
 gends.py -i p53_variants.txt -o p53_direct_stacked_16_1 -p ./ --boxsize 16 --voxelsize 16 --direct
 ```
 
-7. Run predict.py to make ddG predictions.
+7. Run predict.py to make <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictions.
 ```bash
-for i in `seq 1 10`; do predict.py -x p53_direct_stacked_16_1.npy -m ../models/conv_16_24_32_dense_24_ensemble_member_${i}.h5 -o p53_predictions_${i}.txt; done
+for i in `seq 1 10`; do predict.py -x p53_direct_stacked_16_1.npy -m ../models/ThermoNet_ensemble_member_${i}.h5 -o p53_predictions_${i}.txt; done
 ```
 ## References
   1. 3D convolutional neural networks

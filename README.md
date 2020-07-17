@@ -1,5 +1,5 @@
 # ThermoNet
-ThermoNet is a computational framework for quantitative prediction of the changes in protein thermodynamic stability (<img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G") caused by singple-point amino acid substatutions. The core algorithm of ThermoNet is an ensemble of deep 3D convolutional neural networks. 
+ThermoNet is a computational framework for quantitative prediction of the changes in protein thermodynamic stability (<img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G">) caused by singple-point amino acid substatutions. The core algorithm of ThermoNet is an ensemble of deep 3D convolutional neural networks. 
 
 ## Requirements
 To use ThermoNet, you would need to install the following software and Python libraries:

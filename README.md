@@ -52,7 +52,7 @@ for i in `seq 1 10`; do predict.py -x test_direct_stacked_16_1.npy -m models/The
 
 ## Example
 In the following, we illustrate the steps to generate <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G">s for a list of single-point mutations of the p53 tumor suppressor protein. 
-1. Change directory to `examples` where you'll find the PDB file `2ocjA.pdb` and a filed named `p53_variants.txt` which contains a list of p53 single-point mutations.
+1. Change directory to `examples` where you'll find the PDB file `2ocjA.pdb` and a filed named `p53_mutations.txt` which contains a list of p53 single-point mutations.
 
 2. Run the Rosetta FastRelax application to relax the PDB structure. The purpose of doing this is to remove potential high energetic frustructions introduced in the PDB structure and to create a good reference state for creating mutant structures.
 ```bash

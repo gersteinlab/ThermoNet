@@ -2,13 +2,13 @@
 ThermoNet is a computational framework for quantitative prediction of the changes in protein thermodynamic stability (<img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G">) caused by singple-point amino acid substatutions. The core algorithm of ThermoNet is an ensemble of deep 3D convolutional neural networks. 
 
 ## Requirements
-To use ThermoNet, you would need to install the following software and Python libraries:
+ThermoNet was developed to be used on Linux platforms and thus, has only been tested on Linux platform. To use ThermoNet, you would need to install the following software and Python libraries:
   * Rosetta 3.10. Rosetta is a multi-purpose macromolecular modeling suite that is used in ThermoNet for creating and refining protein structures. You can get Rosetta from Rosetta Commons: https://www.rosettacommons.org/software
   * HTMD 1.17. HTMD is a Python library for high-throughput molecular modeling and dynamics simulations. It is called in ThermoNet for voxelizing protein structures and parametrizing the resulting 3D voxel grids.
   * Keras with TensorFlow as the backend.
 
 ## Installation
-ThermoNet ddG prediction is a multi-step protocol. Each step relies on a specific third-party software that needs to be installed first. In the following, we outline the steps to install them.
+ThermoNet <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> prediction is a multi-step protocol. Each step relies on a specific third-party software that needs to be installed first. In the following, we outline the steps to install them.
 
 ### Install Rosetta
 1. Go to https://els2.comotion.uw.edu/product/rosetta to get an academic license for Rosetta.

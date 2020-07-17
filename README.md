@@ -25,7 +25,7 @@ There are many resources out there that one can follow to install TensorFlow and
 3. Open anaconda-navigator from the comand line. Go to Environments and search for keras and tensorflow, install all the matched libraries.
 
 ## Use ThermoNet
-As previously mentioned, the ThermoNet $\Delta\Delta G$ method is a multi-step protocol. We outline the steps needed to make $\Delta\Delta G$ predictions of a given variant or a list of variants in the following. Note that ThermoNet requires that a protein structural model is available for the protein from which the variants are derived. It has not been tested on cases where no protein structures are available. 
+As previously mentioned, the ThermoNet <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> method is a multi-step protocol. We outline the steps needed to make <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictions of a given variant or a list of variants in the following. Note that ThermoNet requires that a protein structural model is available for the protein from which the variants are derived. It has not been tested on cases where no protein structures are available. 
 
 1. Run the following command to refine the given protein structure `XXXXX.pdb`:
 ```bash

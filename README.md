@@ -1,5 +1,5 @@
 # ThermoNet
-ThermoNet is a computational framework for quantitative prediction of the impact of single-point mutations on protein thermodynamic stability. The core algorithm of ThermoNet is an ensemble of deep 3D convolutional neural networks. 
+ThermoNet is a computational framework for quantitative prediction of the changes in protein thermodynamic stability (\Delta\Delta G) caused by singple-point amino acid substatutions. The core algorithm of ThermoNet is an ensemble of deep 3D convolutional neural networks. 
 
 ## Requirements
 To use ThermoNet, you would need to install the following software and Python libraries:
@@ -25,7 +25,7 @@ There are many resources out there that one can follow to install TensorFlow and
 3. Open anaconda-navigator from the comand line. Go to Environments and search for keras and tensorflow, install all the matched libraries.
 
 ## Use ThermoNet
-As previously mentioned, the ThermoNet ddG method is a multi-step protocol. We outline the steps needed to make ddG predictions of a given variant or a list of variants in the following. Note that ThermoNet requires that a protein structural model is available for the protein from which the variants are derived. It has not been tested on cases where no protein structures are available. 
+As previously mentioned, the ThermoNet \Delta\Delta G method is a multi-step protocol. We outline the steps needed to make ddG predictions of a given variant or a list of variants in the following. Note that ThermoNet requires that a protein structural model is available for the protein from which the variants are derived. It has not been tested on cases where no protein structures are available. 
 
 1. Run the following command to refine the given protein structure `XXXXX.pdb`:
 ```bash
@@ -47,7 +47,7 @@ This command will generate a file called `test_direct_stacked_16_1.npy` that sto
 
 4. Run predict.py:
 ```bash
-for i in `seq 1 10`; do predict.py -x test_direct_stacked_16_1.npy -m models/conv_16_24_32_dense_24_ensemble_member_${i}.h5 -o test_predictions_${i}.txt; done
+for i in `seq 1 10`; do predict.py -x test_direct_stacked_16_1.npy -m models/ThermoNet_ensemble_member_${i}.h5 -o test_predictions_${i}.txt; done
 ```
 
 ## Example

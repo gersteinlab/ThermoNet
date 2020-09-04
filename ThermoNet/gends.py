@@ -32,8 +32,8 @@ def parse_cmd():
                         help='Whether to overwrite PDBQT files and mutant PDB files.')
     parser.add_argument('-v', '--verbose', dest='verbose', action='store_true',
                         help='Whether to print verbose messages from HTMD function calls.')
-    parser.add_argument('--inverse', dest='inverse', action='store_true',
-                        help='This flag indicates that the given list of mutations are inverse mutations')
+    parser.add_argument('--reverse', dest='reverse', action='store_true',
+                        help='This flag indicates that the given list of mutations are reverse mutations')
     args = parser.parse_args()
     # do any necessary argument checking here before returning
     return args
@@ -100,8 +100,8 @@ def main():
             features_wt = features_wt_all[pdb_chain + pos]
             features_wt = np.delete(features_wt, obj=6, axis=0)
             features_mt = np.delete(features_mt, obj=6, axis=0)
-            if args.inverse:
-                # inverse mutation
+            if args.reverse:
+                # reverse mutation
                 features_combined = np.concatenate((features_mt, features_wt), axis=0)
             else:
                 # direct mutation
@@ -109,7 +109,7 @@ def main():
             # wild-type synonymous mutation
             # features_combined = np.concatenate((features_wt, features_wt), axis=-1)
             # features_combined = features_mt - features_wt
-            # features of inverse mutations
+            # features of reverse mutations
             # features_combined = features_wt - features_mt
             # features_combined = np.swapaxes(features_combined, 0, -1)
             dataset.append(features_combined)

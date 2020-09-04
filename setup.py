@@ -1,4 +1,7 @@
 # setup.py
+# This setup.py currently is only meant for
+# storing the versioning and maintainer information
+
 from distutils.core import setup
 
 setup(

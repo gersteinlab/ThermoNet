@@ -10,7 +10,7 @@ ThermoNet was developed to be used on Linux platforms and thus, has only been te
 ## Installation
 ThermoNet <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> prediction is a multi-step protocol. Each step relies on a specific third-party software that needs to be installed first. In the following, we outline the steps to install them.
 
-### Install Rosetta
+### Install Rosetta 3.10
 1. Go to https://els2.comotion.uw.edu/product/rosetta to get an academic license for Rosetta.
 2. Download Rosetta 3.10 (source + binaries for Linux) from this site: https://www.rosettacommons.org/software/license-and-download
 3. Extract the tarball to a local directory from which Rosetta binaries can be called by specifying their full path.
@@ -31,7 +31,7 @@ As previously mentioned, the ThermoNet <img src="https://render.githubuserconten
 ```bash
 relax.static.linuxgccrelease -in:file:s XXXXX.pdb -relax:constrain_relax_to_start_coords -out:suffix _relaxed -out:no_nstruct_label -relax:ramp_constraints false
 ```
-where relax.static.linuxgccrelease is the binary executable of the Rosetta FastRelax protocol for relaxing the given protein structure with the Rosetta energy function. This command will generate a PDB file named XXXXX_relaxed.pdb, which will be used in later steps.
+where `relax.static.linuxgccrelease` is the binary executable of the Rosetta FastRelax protocol for relaxing the given protein structure with the Rosetta energy function. This command will generate a PDB file named XXXXX_relaxed.pdb, which will be used in later steps.
 
 2. Run the following command to create a structural model for each of the variants in the given list:
 ```bash
@@ -41,9 +41,13 @@ where VARIANT_LIST is a given file in which each line is a given variant in the 
 
 3. Run the following command to generate tensors (parameterized 3D voxel grids), which will be the input of the 3D deep convolutional neural networks:
 ```bash
-gends.py -i VARIANT_LIST -o test_direct_stacked_16_1 -p /path/to/where/all/XXXXX_relaxed.pdb/is/stored --boxsize 16 --voxelsize 1 --direct
+gends.py -i VARIANT_LIST -o test_direct_stacked_16_1 -p /path/to/where/all/XXXXX_relaxed.pdb/is/stored --boxsize 16 --voxelsize 1
 ```
 This command will generate a file called `test_direct_stacked_16_1.npy` that stores the parameterized 3D voxel grids for each variant in the given list. This file will be used as input to the ensemble of 3D deep convolutional neural networks.
+If the purpose is to make predictions for reverse mutations, then add the `--reverse` to the above command so that it reads as follows
+```bash
+gends.py -i VARIANT_LIST -o test_reverse_stacked_16_1 -p /path/to/where/all/XXXXX_relaxed.pdb/is/stored --boxsize 16 --voxelsize 1 --reverse
+```
 
 4. Run predict.py:
 ```bash

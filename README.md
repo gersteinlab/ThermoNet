@@ -84,7 +84,7 @@ The purpose of renaming the files is to make the file names conform to the requi
 
 6. Generate a dataset containing the tensor for each mutation. Note that you'll need to run this step in the HTMD conda environment.
 ```bash
-gends.py -i p53_variants.txt -o p53_direct_stacked_16_1 -p ./ --boxsize 16 --voxelsize 16 --direct
+gends.py -i p53_variants.txt -o p53_direct_stacked_16_1 -p ./ --boxsize 16 --voxelsize 1
 ```
 
 7. Run predict.py to make <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictions.

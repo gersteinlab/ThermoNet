@@ -31,6 +31,7 @@ There are many resources out there that one can follow to install TensorFlow and
 1. Get the Python 3.7 version [Anaconda 2019.10](https://www.anaconda.com/distribution/) for Linux installer. 
 2. Follow the instructions [here](https://docs.anaconda.com/anaconda/install/linux/) to install it.
 3. Open anaconda-navigator from the comand line. Go to Environments and search for keras and tensorflow, install all the matched libraries.
+
 Alternatively, one can create a conda environment to use Keras and TensorFlow, i.e.:
 ```bash
 # create conda environment for deep learning/neural networks

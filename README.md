@@ -38,12 +38,12 @@ Alternatively, one can create a conda environment to use Keras and TensorFlow, i
 conda create -y -n tensorflow112 python=3.6 anaconda
 source activate tensorflow112
 
-#install libraries
+# install libraries
 pip install keras tensorflow-gpu==1.12
 ```
 
 ## Use ThermoNet
-As previously mentioned, the ThermoNet <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> method is a multi-step protocol. We outline the steps needed to make <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictions of a given variant or a list of variants in the following. Note that ThermoNet requires that a protein structural model is available for the protein from which the variants are derived. In the case where an experimental structure is not available, one can create a structual model through homology model. However, the performance of ThermoNet when it is used with homology models has not been tested.
+As previously mentioned, the ThermoNet <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> method is a multi-step protocol. We outline the steps needed to make <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictions of a given variant or a list of variants in the following. Note that ThermoNet requires that a protein structural model is available for the protein from which the variants are derived. In the case where an experimental structure is not available, in principle one can create a structual model through homology modeling. However, we did not test ThermoNet under such scenario, thus, its performance when used with homology models is unknown.
 
 1. Run the following command to refine the given protein structure `XXXXX.pdb`:
 ```bash

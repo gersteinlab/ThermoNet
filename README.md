@@ -12,6 +12,12 @@ ThermoNet was developed to be used on Linux platforms and thus, has only been te
 ## Installation
 ThermoNet <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> prediction is accomplished through a multi-step protocol. Each step relies on a specific third-party software that needs to be installed first. In the following, we outline the steps to install them.
 
+### Clone ThermoNet
+Clone ThermoNet to a local directory.
+```bash
+git clone https://github.com/gersteinlab/ThermoNet.git
+```
+
 ### Install Rosetta 3.10
 1. Go to https://els2.comotion.uw.edu/product/rosetta to get an academic license for Rosetta.
 2. Download Rosetta 3.10 (source + binaries for Linux) from this site: https://www.rosettacommons.org/software/license-and-download

@@ -2,7 +2,7 @@
 
 import os
 import sys
-import utils
+from utils import pdb_utils
 import time
 from argparse import ArgumentParser
 import numpy as np
@@ -73,7 +73,7 @@ def main():
             if pdb_chain + pos not in features_wt_all:
                 print('Now computing features for: {0}'.format(wt_pdb_path))
                 # HTMD generates channel-first tensors
-                features = utils.compute_voxel_features(pos, wt_pdb_path, boxsize=args.boxsize,
+                features = pdb_utils.compute_voxel_features(pos, wt_pdb_path, boxsize=args.boxsize,
                         voxelsize=args.voxelsize, verbose=args.verbose, rotations=rotations)
                 features_wt_all[pdb_chain + pos] = features
 
@@ -83,7 +83,7 @@ def main():
             if not os.path.exists(mt_pdb_path):
                 print('PDB file for mutant does not exist: ' + mt_pdb_path)
                 print('Running Rosetta to generate a mutant structure ...')
-                mt_pdb_path_tmp = utils.build_mt_struct(wt_pdb_path, chain_id, pos, wt, mt, \
+                mt_pdb_path_tmp = pdb_utils.build_mt_struct(wt_pdb_path, chain_id, pos, wt, mt, \
                         args.overwrite, os.path.join(pdb_dir, pdb_chain))
                 # rename the mutant PDB file to ${pdb_chain}_${variant}_relaxed.pdb
                 os.rename(mt_pdb_path_tmp, mt_pdb_path)
@@ -91,12 +91,10 @@ def main():
             # calculate mutant features
             print('Now computing features for: {0}'.format(mt_pdb_path))
             # HTMD generates channel-first tensors
-            features_mt = utils.compute_voxel_features(pos, mt_pdb_path, boxsize=args.boxsize,
+            features_mt = pdb_utils.compute_voxel_features(pos, mt_pdb_path, boxsize=args.boxsize,
                     voxelsize=args.voxelsize, verbose=args.verbose, rotations=rotations)
 
             # make the property channels the first axis
-            # features = features.swapaxes(0, -1)
-            # features_mt = features_mt.swapaxes(0, -1)
             features_wt = features_wt_all[pdb_chain + pos]
             features_wt = np.delete(features_wt, obj=6, axis=0)
             features_mt = np.delete(features_mt, obj=6, axis=0)
@@ -106,12 +104,6 @@ def main():
             else:
                 # direct mutation
                 features_combined = np.concatenate((features_wt, features_mt), axis=0)
-            # wild-type synonymous mutation
-            # features_combined = np.concatenate((features_wt, features_wt), axis=-1)
-            # features_combined = features_mt - features_wt
-            # features of reverse mutations
-            # features_combined = features_wt - features_mt
-            # features_combined = np.swapaxes(features_combined, 0, -1)
             dataset.append(features_combined)
 
     # convert into NumPy ndarray
@@ -120,7 +112,6 @@ def main():
 
     # write dataset to disk file
     print('Now writing dataset to disk file: {0}'.format(args.output))
-    # utils.write_5dtensor(dataset, file=args.output, shape=dataset.shape)
     np.save(args.output, dataset)
 
 

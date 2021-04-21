@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Feb 24 22:55:40 2019
 
-@author: bian
+"""
+    Run this script to get ThermoNet ddG predictions.
 """
 
 # import required modules
@@ -14,6 +12,12 @@ from argparse import ArgumentParser
 
 def parse_cmd_args():
     """
+    Parse command-line arguments for running ThermoNet.
+
+    Returns
+    -------
+    Parsed command-line arguments.
+
     """
     argparser = ArgumentParser()
     argparser.add_argument('-x', '--features', dest='features', type=str, required=True,
@@ -26,8 +30,6 @@ def parse_cmd_args():
 
 
 def main():
-    """
-    """
     # parse command line arguments
     args = parse_cmd_args()
 

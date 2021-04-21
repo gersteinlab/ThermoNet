@@ -17,14 +17,19 @@ ROSETTA_BIN = '/ysm-gpfs/apps/software/Rosetta/3.10/main/source/bin/relax.static
 
 def vector_add(v, w):
     """
+    Adding two vectors in a element-wise manner.
 
     Parameters
     ----------
-    v
-    w
+    v : list
+        Vector v.
+    w : list
+        Vector w.
 
     Returns
     -------
+    list
+        The result of adding vectors v and w.
 
     """
     if len(v) != len(w):
@@ -35,14 +40,19 @@ def vector_add(v, w):
 
 def vector_subtract(v, w):
     """
+    Subtracting vector w from vector v in a element-wise manner.
 
     Parameters
     ----------
-    v
-    w
+    v : list
+        Vector v.
+    w : list
+        Vector w.
 
     Returns
     -------
+    list
+        The result of subtracting vector w from vector v.
 
     """
     if len(v) != len(w):
@@ -74,6 +84,7 @@ def vector_sum(vectors):
 
 def scalar_multiply(c, v):
     """
+    Multiply each element of vector v by the scalar c.
 
     Parameters
     ----------
@@ -113,14 +124,19 @@ def vector_mean(vectors):
 
 def dot(v, w):
     """
+    Computes the dot product of vectors v and w.
 
     Parameters
     ----------
-    v
-    w
+    v : list
+        Vector v.
+    w : list
+        Vector w.
 
     Returns
     -------
+    float
+        The dot product of vectors v and w.
 
     """
     if len(v) != len(w):
@@ -148,14 +164,19 @@ def sum_of_squares(v):
 
 def squared_distance(v, w):
     """
+    The square of the Euclidean distance between v and w.
 
     Parameters
     ----------
-    v
-    w
+    v : list
+        Vector v.
+    w : list
+        Vector w.
 
     Returns
     -------
+    float
+        The square of the Euclidean distance between v and w.
 
     """
     return sum_of_squares(vector_subtract(v, w))
@@ -163,14 +184,19 @@ def squared_distance(v, w):
 
 def distance(v, w):
     """
+    Computes the Euclidean distance between v and w.
 
     Parameters
     ----------
-    v
-    w
+    v : list
+        Vector v.
+    w : list
+        Vector w.
 
     Returns
     -------
+    float
+        The Euclidean distance between v and w.
 
     """
     return math.sqrt(squared_distance(v, w))
@@ -178,13 +204,16 @@ def distance(v, w):
 
 def naive_relu(x):
     """
+    A naive implementation of the ReLU activation function.
 
     Parameters
     ----------
-    x
+    x : Numpy NDArray
 
     Returns
     -------
+    NumPy NDArray
+        Input matrix after filtered by the ReLU activation function.
 
     """
     assert len(x.shape) == 2
@@ -452,4 +481,4 @@ def main():
     -------
 
     """
-
+    pass

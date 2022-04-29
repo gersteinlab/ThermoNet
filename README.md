@@ -1,12 +1,12 @@
 # ThermoNet
-ThermoNet is a computational framework for quantitative prediction of the changes in protein thermodynamic stability (<img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G">) caused by single-point amino acid substitutions. The core algorithm of ThermoNet is an ensemble of deep 3D convolutional neural networks. ThermoNet was compared with a large set of <img     src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictors and was shown to perform equally well as the best methods in the field while effectively addressing prediction bias. If you find ThermoNet useful in your work, please consider citing the ThermoNet paper: 
+ThermoNet is a computational framework for quantitative prediction of the changes in protein thermodynamic stability (<img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G">) caused by single-point amino acid substitutions. The core algorithm of ThermoNet is an ensemble of deep 3D convolutional neural networks. ThermoNet was compared with a large set of <img     src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictors and was shown to perform equally well as the best methods in the field while effectively addressing prediction bias. If you find ThermoNet useful in your work, please consider citing our paper: 
 * Li, B., Yang, Y.T., Capra, J.A., and Gerstein, M.B. (2020). Predicting changes in protein thermodynamic stability upon point mutation with deep 3D convolutional neural networks. PLoS Comput Biol 16, e1008291.
  
 
 ## Requirements
 ThermoNet depends on a few packages that are only available on Linux platforms, thus, it has only been tested on Linux platforms. To use ThermoNet, you would need to install the following software and Python libraries:
   * Rosetta 3.10. Rosetta is a multi-purpose macromolecular modeling suite that is used in ThermoNet for creating and refining protein structures. You can get Rosetta from the Rosetta Commons website: https://www.rosettacommons.org/software
-  * HTMD 1.17. HTMD is a Python library for high-throughput molecular modeling and dynamics simulations. It is called in ThermoNet for voxelizing protein structures and parametrizing the resulting 3D voxel grids. We developed ThermoNet to work with  HTMD 1.17, however, it was also shown to work with HTMD 1.22 (thanks to Dr. Toni Giorgino for testing it out).
+  * HTMD 1.17. HTMD is a Python library for high-throughput molecular modeling and dynamics simulations. It is called in ThermoNet for voxelizing protein structures and parametrizing the resulting 3D voxel grids. We developed ThermoNet to work with  HTMD 1.17, however, it was also shown to work with HTMD 1.22 (thanks to Dr. Toni Giorgino for testing it out). Latest tests showed that ThermoNet is compatible with HTMD 2.0.5.
   * Keras 2.1.6 with TensorFlow 1.12.0 as the backend.
 
 ## Installation
@@ -23,16 +23,20 @@ git clone https://github.com/gersteinlab/ThermoNet.git
 2. Download Rosetta 3.10 (source + binaries for Linux) from this site: https://www.rosettacommons.org/software/license-and-download
 3. Extract the tarball to a local directory from which Rosetta binaries can be called by specifying their full path.
 
-### Install HTMD 1.17
-The free version of HTMD is free to non-commercial users although it does not come with full functionality. But for the purpose of using it with ThermoNet, the free version is sufficient. Install it by following the instructions listed [here](https://software.acellera.com/install-htmd.html).
+### Install HTMD
+The free version of HTMD is free to non-commercial users although it does not come with full functionality. But for the purpose of using it with ThermoNet, the free version is sufficient. You can either install it by following the instructions listed [here](https://software.acellera.com/install-htmd.html), or by running
+```bash
+conda env create --name thermonet --file environment.yaml
+```
+The above command will create a conda environment and install all dependencies so that one can run ThermoNet to make input tensors.
 
 ### Install TensorFlow and Keras
-There are many resources out there that one can follow to install TensorFlow and Keras. I found it easiest to install them with the Anaconda Python distribution.
+This step is needed for running ThermoNet to make <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictions. There are many resources out there that one can follow to install TensorFlow and Keras. I found it easiest to install them with the Anaconda Python distribution.
 1. Get the Python 3.7 version [Anaconda 2019.10](https://www.anaconda.com/distribution/) for Linux installer. 
 2. Follow the instructions [here](https://docs.anaconda.com/anaconda/install/linux/) to install it.
 3. Open anaconda-navigator from the comand line. Go to Environments and search for keras and tensorflow, install all the matched libraries.
 
-Alternatively, one can create a conda environment to use Keras and TensorFlow, i.e.:
+Alternatively, one can create a conda environment to use Keras and TensorFlow on a high-performance computing cluster, i.e.:
 ```bash
 # create conda environment for deep learning/neural networks
 conda create -y -n tensorflow112 python=3.6 anaconda
@@ -76,11 +80,11 @@ for i in `seq 1 10`; do predict.py -x test_direct_stacked_16_1.npy -m models/The
 In the following, we illustrate the steps to generate <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G">s for a list of single-point mutations of the p53 tumor suppressor protein. 
 1. Change directory to `examples` where you'll find the PDB file `2ocjA.pdb` and a filed named `p53_mutations.txt` which contains a list of p53 single-point mutations.
 
-2. Run the Rosetta FastRelax application to relax the PDB structure. The purpose of doing this is to remove potential high energetic frustructions introduced in the PDB structure and to create a good reference state for creating mutant structures.
+2. Run the Rosetta FastRelax application to relax the PDB structure. The purpose of doing this is to remove potential high energetic frustructions (clashes, bad residue geometries, etc.) in the PDB structure and to create a good reference state for creating mutant structures.
 ```bash
 relax.static.linuxgccrelease -in:file:s 2ocjA.pdb -relax:constrain_relax_to_start_coords -out:suffix _relaxed -out:no_nstruct_label -relax:ramp_constraints false
 ```
-This step takes about a minute or so depending on the size of the protein and will generate a file named `2ocjA_relaxed.pdb`.
+This step takes about a minute or so depending on the size of the protein and will generate a file named `2ocjA_relaxed.pdb`. If your protein is very big, say 1000+ residues, you can add the flag `-default_max_cycles 200` to make this relax run shorter. 
 
 3. Now create a directory called `2ocjA` and move `2ocjA_relaxed.pdb` to this directory.
 ```bash

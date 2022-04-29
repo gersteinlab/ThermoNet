@@ -60,7 +60,7 @@ def main():
             '-out:no_nstruct_label', '-relax:ramp_constraints false',
             '-relax:respect_resfile',
             '-packing:resfile', variant_resfile,
-            # '-out:nstruct', '1',
+            '-default_max_cycles', 200,
             '-out:file:scorefile', os.path.join(chain_dir, pdb_chain + '_relaxed.sc'),
             '-out:suffix', '_' + variant + '_relaxed'
         ])

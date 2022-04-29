@@ -8,6 +8,6 @@ setup(
     name='ThermoNet',
     version='1.0',
     author='Bian Li',
-    author_email='bian.li@yale.edu',
+    author_email='comput.biol.geek@gmail.com',
     packages=['ThermoNet', 'utils'],
 )

@@ -84,7 +84,7 @@ In the following, we illustrate the steps to generate <img src="https://render.g
 ```bash
 relax.static.linuxgccrelease -in:file:s 2ocjA.pdb -relax:constrain_relax_to_start_coords -out:suffix _relaxed -out:no_nstruct_label -relax:ramp_constraints false
 ```
-This step takes about a minute or so depending on the size of the protein and will generate a file named `2ocjA_relaxed.pdb`. If your protein is very big, say 1000+ residues, you can add the flag `-default_max_cycles 200` to make this relax run shorter. 
+This step usually takes a few minutes depending on the size of the protein (it may take hours to relax a large protein, for example, one that has >500 residues) and will generate a file named `2ocjA_relaxed.pdb`. If your protein is very big, say 1000+ residues, you can add the flag `-default_max_cycles 200` to make this relax run shorter. 
 
 3. Now create a directory called `2ocjA` and move `2ocjA_relaxed.pdb` to this directory.
 ```bash

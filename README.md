@@ -34,7 +34,7 @@ The above command will create a conda environment and install all dependencies s
 This step is needed for running ThermoNet to make <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictions. There are many resources out there that one can follow to install TensorFlow and Keras. I found it easiest to install them with the Anaconda Python distribution.
 1. Get the Python 3.7 version [Anaconda 2019.10](https://www.anaconda.com/distribution/) for Linux installer. 
 2. Follow the instructions [here](https://docs.anaconda.com/anaconda/install/linux/) to install it.
-3. Open anaconda-navigator from the comand line. Go to Environments and search for keras and tensorflow, install all the matched libraries.
+3. Open anaconda-navigator from the command line. Go to Environments and search for keras and tensorflow, and install all the matched libraries.
 
 Alternatively, one can create a conda environment to use Keras and TensorFlow on a high-performance computing cluster, i.e.:
 ```bash
@@ -47,7 +47,7 @@ pip install keras tensorflow-gpu==1.12
 ```
 
 ## Use ThermoNet
-As previously mentioned, the ThermoNet <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> method is a multi-step protocol. We outline the steps needed to make <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictions of a given variant or a list of variants in the following. Note that ThermoNet requires that a protein structural model is available for the protein from which the variants are derived. In the case where an experimental structure is not available, in principle one can create a structual model through homology modeling. However, we did not test ThermoNet under such scenario, thus, its performance when used with homology models is unknown.
+As previously mentioned, the ThermoNet <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> method is a multi-step protocol. We outline the steps needed to make <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictions of a given variant or a list of variants in the following. Note that ThermoNet requires that a protein structural model is available for the protein from which the variants are derived. In the case where an experimental structure is not available, in principle one can create a structural model through homology modeling. However, we did not test ThermoNet under such a scenario, thus, its performance when used with homology models is unknown.
 
 1. Run the following command to refine the given protein structure `XXXXX.pdb`:
 ```bash
@@ -66,7 +66,7 @@ where VARIANT_LIST is a given file in which each line is a given variant in the 
 gends.py -i VARIANT_LIST -o test_direct_stacked_16_1 -p /path/to/where/all/XXXXX_relaxed.pdb/is/stored --boxsize 16 --voxelsize 1
 ```
 This command will generate a file called `test_direct_stacked_16_1.npy` that stores the parameterized 3D voxel grids for each variant in the given list. This file will be used as input to the ensemble of 3D deep convolutional neural networks.
-If the purpose is to make predictions for reverse mutations, then add the `--reverse` to the above command so that it reads as follows
+If the purpose is to make predictions for reverse mutations, then add the `--reverse` flag to the above command so that it reads as follows
 ```bash
 gends.py -i VARIANT_LIST -o test_reverse_stacked_16_1 -p /path/to/where/all/XXXXX_relaxed.pdb/is/stored --boxsize 16 --voxelsize 1 --reverse
 ```
@@ -77,10 +77,10 @@ for i in `seq 1 10`; do predict.py -x test_direct_stacked_16_1.npy -m models/The
 ```
 
 ## Example
-In the following, we illustrate the steps to generate <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G">s for a list of single-point mutations of the p53 tumor suppressor protein. 
-1. Change directory to `examples` where you'll find the PDB file `2ocjA.pdb` and a filed named `p53_mutations.txt` which contains a list of p53 single-point mutations.
+In the following, we outline the steps to predict <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G">s for a list of single-point mutations of the p53 tumor suppressor protein. 
+1. Change the directory to `examples` where you'll find the PDB file `2ocjA.pdb` and a file named `p53_mutations.txt` which contains a list of p53 single-point mutations.
 
-2. Run the Rosetta FastRelax application to relax the PDB structure. The purpose of doing this is to remove potential high energetic frustructions (clashes, bad residue geometries, etc.) in the PDB structure and to create a good reference state for creating mutant structures.
+2. Run the Rosetta FastRelax application to relax the PDB structure. The purpose of doing this is to remove potential energetic frustrations (clashes, bad residue geometries, etc.) in the PDB structure and to create a good reference state for creating mutant structures.
 ```bash
 relax.static.linuxgccrelease -in:file:s 2ocjA.pdb -relax:constrain_relax_to_start_coords -out:suffix _relaxed -out:no_nstruct_label -relax:ramp_constraints false
 ```
@@ -96,7 +96,7 @@ mv 2ocjA_relaxed.pdb 2ocjA
 ```bash
 rosetta_relax.py --rosetta-bin relax.static.linuxgccrelease -l p53_mutations.txt --base-dir ./
 ```
-This step will create a PDB file for each mutations in the given list. For example, it will create a file named `2ocjA_relaxed_Q104H_relaxed.pdb` for the mutation `2ocjA 104 Q H`.
+This step will create a PDB file for each mutation in the given list. For example, it will create a file named `2ocjA_relaxed_Q104H_relaxed.pdb` for the mutation `2ocjA 104 Q H`.
 
 5. Run the following command to rename all PDB files.
 ```bash

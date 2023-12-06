@@ -1,16 +1,16 @@
 # ThermoNet
-ThermoNet is a computational framework for quantitative prediction of the changes in protein thermodynamic stability (<img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G">) caused by single-point amino acid substitutions. The core algorithm of ThermoNet is an ensemble of deep 3D convolutional neural networks. ThermoNet was compared with a large set of <img     src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictors and was shown to perform equally well as the best methods in the field while effectively addressing prediction bias. If you find ThermoNet useful in your work, please consider citing our paper: 
+ThermoNet is a computational framework for quantitative prediction of the changes in protein thermodynamic stability ($\Delta\Delta G$) caused by single-point amino acid substitutions. The core algorithm of ThermoNet is an ensemble of deep 3D convolutional neural networks. ThermoNet was compared with a large set of $\Delta\Delta G$ predictors and was shown to perform equally well as the best methods in the field while effectively addressing prediction bias. If you find ThermoNet useful in your work, please consider citing our paper: 
 * Li, B., Yang, Y.T., Capra, J.A., and Gerstein, M.B. (2020). Predicting changes in protein thermodynamic stability upon point mutation with deep 3D convolutional neural networks. PLoS Comput Biol 16, e1008291.
  
 
 ## Requirements
 ThermoNet depends on a few packages that are only available on Linux platforms, thus, it has only been tested on Linux platforms. To use ThermoNet, you would need to install the following software and Python libraries:
   * Rosetta 3.10. Rosetta is a multi-purpose macromolecular modeling suite that is used in ThermoNet for creating and refining protein structures. You can get Rosetta from the Rosetta Commons website: https://www.rosettacommons.org/software
-  * HTMD 1.17. HTMD is a Python library for high-throughput molecular modeling and dynamics simulations. It is called in ThermoNet for voxelizing protein structures and parametrizing the resulting 3D voxel grids. We developed ThermoNet to work with  HTMD 1.17, however, it was also shown to work with HTMD 1.22 (thanks to Dr. Toni Giorgino for testing it out). Latest tests showed that ThermoNet is compatible with HTMD 2.0.5.
+  * HTMD 1.17. HTMD is a Python library for high-throughput molecular modeling and dynamics simulations. It is called in ThermoNet for voxelizing protein structures and parametrizing the resulting 3D voxel grids. We developed ThermoNet to work with  HTMD 1.17, however, it was also shown to work with HTMD 1.22 (thanks to Dr. Toni Giorgino for testing it out). The latest tests showed that ThermoNet is compatible with HTMD 2.0.5.
   * Keras 2.1.6 with TensorFlow 1.12.0 as the backend.
 
 ## Installation
-ThermoNet <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> prediction is accomplished through a multi-step protocol. Each step relies on a specific third-party software that needs to be installed first. In the following, we outline the steps to install them.
+Predicting the $\Delta\Delta G$ using ThermoNet is done through a multi-step protocol. Each step relies on a specific third-party software that needs to be installed first. In the following, we outline the steps to install them.
 
 ### Clone ThermoNet
 Clone ThermoNet to a local directory.
@@ -24,14 +24,14 @@ git clone https://github.com/gersteinlab/ThermoNet.git
 3. Extract the tarball to a local directory from which Rosetta binaries can be called by specifying their full path.
 
 ### Install HTMD
-The free version of HTMD is free to non-commercial users although it does not come with full functionality. But for the purpose of using it with ThermoNet, the free version is sufficient. You can either install it by following the instructions listed [here](https://software.acellera.com/install-htmd.html), or by running
+The free version of HTMD is free to non-commercial users although it does not come with full functionality. But to use it with ThermoNet, the free version is sufficient. You can either install it by following the instructions listed [here](https://software.acellera.com/install-htmd.html), or by running
 ```bash
 conda env create --name thermonet --file environment.yaml
 ```
 The above command will create a conda environment and install all dependencies so that one can run ThermoNet to make input tensors.
 
 ### Install TensorFlow and Keras
-This step is needed for running ThermoNet to make <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictions. There are many resources out there that one can follow to install TensorFlow and Keras. I found it easiest to install them with the Anaconda Python distribution.
+This step is needed for running ThermoNet to make $\Delta\Delta G$ predictions. There are many resources out there that one can follow to install TensorFlow and Keras. I found it easiest to install them with the Anaconda Python distribution.
 1. Get the Python 3.7 version [Anaconda 2019.10](https://www.anaconda.com/distribution/) for Linux installer. 
 2. Follow the instructions [here](https://docs.anaconda.com/anaconda/install/linux/) to install it.
 3. Open anaconda-navigator from the command line. Go to Environments and search for keras and tensorflow, and install all the matched libraries.
@@ -47,7 +47,7 @@ pip install keras tensorflow-gpu==1.12
 ```
 
 ## Use ThermoNet
-As previously mentioned, the ThermoNet <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> method is a multi-step protocol. We outline the steps needed to make <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictions of a given variant or a list of variants in the following. Note that ThermoNet requires that a protein structural model is available for the protein from which the variants are derived. In the case where an experimental structure is not available, in principle one can create a structural model through homology modeling. However, we did not test ThermoNet under such a scenario, thus, its performance when used with homology models is unknown.
+As previously mentioned, the ThermoNet $\Delta\Delta G$ method is a multi-step protocol. We outline the steps needed to make $\Delta\Delta G$ predictions of a given variant or a list of variants in the following. Note that ThermoNet requires that a protein structural model is available for the protein from which the variants are derived. In the case where an experimental structure is not available, in principle one can create a structural model through homology modeling. However, we did not test ThermoNet under such a scenario, thus, its performance when used with homology models is unknown.
 
 1. Run the following command to refine the given protein structure `XXXXX.pdb`:
 ```bash
@@ -77,7 +77,7 @@ for i in `seq 1 10`; do predict.py -x test_direct_stacked_16_1.npy -m models/The
 ```
 
 ## Example
-In the following, we outline the steps to predict <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G">s for a list of single-point mutations of the p53 tumor suppressor protein. 
+In the following, we outline the steps to predict $\Delta\Delta G$ for a list of single-point mutations of the p53 tumor suppressor protein. 
 1. Change the directory to `examples` where you'll find the PDB file `2ocjA.pdb` and a file named `p53_mutations.txt` which contains a list of p53 single-point mutations.
 
 2. Run the Rosetta FastRelax application to relax the PDB structure. The purpose of doing this is to remove potential energetic frustrations (clashes, bad residue geometries, etc.) in the PDB structure and to create a good reference state for creating mutant structures.
@@ -109,18 +109,18 @@ The purpose of renaming the files is to make the file names conform to the requi
 gends.py -i p53_variants.txt -o p53_direct_stacked_16_1 -p ./ --boxsize 16 --voxelsize 1
 ```
 
-7. Run predict.py to make <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> predictions.
+7. Run predict.py to make $\Delta\Delta$ predictions.
 ```bash
 for i in `seq 1 10`; do predict.py -x p53_direct_stacked_16_1.npy -m ../models/ThermoNet_ensemble_member_${i}.h5 -o p53_predictions_${i}.txt; done
 ```
 
-8. Now take the average of the predictions from these 10 models as the final <img src="https://render.githubusercontent.com/render/math?math=\Delta\Delta G"> prediction.
+8. Now take the average of the predictions from these 10 models as the final $\Delta\Delta G$ prediction.
 
 ## References
   1. ThermoNet
   * Li, B., Yang, Y.T., Capra, J.A., and Gerstein, M.B. (2020). Predicting changes in protein thermodynamic stability upon point mutation with deep 3D convolutional neural networks. PLoS Comput Biol 16, e1008291.
   2. 3D convolutional neural networks
-  * Torng, W., and Altman, R.B. (2017). 3D deep convolutional neural networks for amino acid environment similarity analysis. BMC bioinformatics 18, 302
+  * Torng, W., and Altman, R.B. (2017). 3D deep convolutional neural networks for amino acid environment similarity analysis. BMC Bioinformatics 18, 302
   * Jimenez, J., Skalic, M., Martinez-Rosell, G., and De Fabritiis, G. (2018). K-DEEP: Protein-Ligand Absolute Binding Affinity Prediction via 3D-Convolutional Neural Networks. Journal of Chemical Information and Modeling 58, 287-296 
   3. Rosetta
   * Leaver-Fay, A., Tyka, M., Lewis, S.M., Lange, O.F., Thompson, J., Jacak, R., Kaufman, K., Renfrew, P.D., Smith, C.A., Sheffler, W., et al. (2011). ROSETTA3: an object-oriented software suite for the simulation and design of macromolecules. Methods Enzymol 487, 545-574

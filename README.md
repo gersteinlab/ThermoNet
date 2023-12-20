@@ -1,5 +1,5 @@
 # ThermoNet
-ThermoNet is a computational framework for quantitative prediction of the changes in protein thermodynamic stability ($\Delta\Delta G$) caused by single-point amino acid substitutions. The core algorithm of ThermoNet is an ensemble of deep 3D convolutional neural networks. ThermoNet was compared with a large set of $\Delta\Delta G$ predictors and was shown to perform equally well as the best methods in the field while effectively addressing prediction bias. If you find ThermoNet useful in your work, please consider citing our paper: 
+ThermoNet is a computational method for quantitative prediction of the changes in protein thermodynamic stability ($\Delta\Delta G$) caused by single-point amino acid substitutions. The core algorithm of ThermoNet is an ensemble of deep 3D convolutional neural networks. ThermoNet was benchmarked against a large set of $\Delta\Delta G$ predictors and was shown to perform equally well as the best methods while effectively addressing prediction bias. If you find ThermoNet useful in your work, please consider citing our paper: 
 * Li, B., Yang, Y.T., Capra, J.A., and Gerstein, M.B. (2020). Predicting changes in protein thermodynamic stability upon point mutation with deep 3D convolutional neural networks. PLoS Comput Biol 16, e1008291.
  
 
